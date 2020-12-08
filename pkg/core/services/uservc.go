@@ -14,13 +14,13 @@ const User = `1.Address ATM
 2.Show Balance
 3.Payment
 4.Transaction History
-5.Выйти`
+5.Exit`
 func Users(DBs *sql.DB, user models.User) {
 	fmt.Println(User)
 	var k int
 	_, err := fmt.Scan(&k)
 	if err != nil {
-		log.Println("Неверный ввод, введите число", err)
+		log.Println("Error try again", err)
 	}
 	switch k{
 	case 1:
