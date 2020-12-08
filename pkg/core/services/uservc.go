@@ -17,12 +17,12 @@ const User = `1.Address ATM
 5.Exit`
 func Users(DBs *sql.DB, user models.User) {
 	fmt.Println(User)
-	var k int
-	_, err := fmt.Scan(&k)
+	var input int
+	_, err := fmt.Scan(&input)
 	if err != nil {
 		log.Println("Error try again", err)
 	}
-	switch k{
+	switch input{
 	case 1:
 		ATMsAddresses(DBs, user) //1
 	case 2:
@@ -143,14 +143,7 @@ func ShowHistoryOfTransaction(Db *sql.DB, user models.User) {
 			}
 			arr = append(arr, p)
 		}
-		for i := 0; i < len(arr); i++ {
-			fmt.Println("    Bank Of America  ")
-			fmt.Println("ATM number:",arr[i].ID)
-			fmt.Println("Date:",arr[i].Date)
-			fmt.Println("Time:",arr[i].Time)
-			fmt.Println("Sum of payment:",arr[i].OperationAmount)
-			fmt.Println("Your number card:",arr[i].AccountNumber)
-			fmt.Println("Receiver card:",arr[i].ReceiverAccountNumber, "\n")
+		for i := 0; i < len(arr); i++ {fmt.Println("    Bank Of America  ", "ATM number:",arr[i].ID, "Date:", arr[i].Date, "Time:",arr[i].Time ,"Sum of payment:",arr[i].OperationAmount,"Your number card:",arr[i].AccountNumber, "Receiver card:",arr[i].ReceiverAccountNumber)
 			//fmt.Println("Limit:",arr[i].AvailableLimit, "\n")
 		}
 	} else {
@@ -180,14 +173,7 @@ func ShowHistoryOfTransaction(Db *sql.DB, user models.User) {
 			}
 			arr = append(arr, p)
 		}
-		for i := 0; i < len(arr); i++ {
-			fmt.Println("    Bank Of America  ")
-			fmt.Println("ATM number:",arr[i].ID)
-			fmt.Println("Date:",arr[i].Date)
-			fmt.Println("Time:",arr[i].Time)
-			fmt.Println("Sum of payment:",arr[i].OperationAmount)
-			fmt.Println("Your number card:",arr[i].AccountNumber)
-			fmt.Println("Receiver card:",arr[i].ReceiverAccountNumber, "\n")
+		for i := 0; i < len(arr); i++ { fmt.Println("    Bank Of America  ", "ATM number:",arr[i].ID, "Date:", arr[i].Date, "Time:",arr[i].Time ,"Sum of payment:",arr[i].OperationAmount,"Your number card:",arr[i].AccountNumber, "Receiver card:",arr[i].ReceiverAccountNumber)
 			//fmt.Println("Limit:",arr[i].AvailableLimit, "\n")
 		}
 	}
@@ -223,12 +209,12 @@ func Payment(Db *sql.DB, user models.User) {
 	if err != nil {
 		panic(err)
 	}
-	row1 := Db.QueryRow(db.SelectAmount, receiverAccountNumber)
+	row = Db.QueryRow(db.SelectAmount, receiverAccountNumber)
 	err = row1.Scan(&receiverAccount.Amount)
 	if err != nil {
 		panic(err)
 	}
-	row2 := Db.QueryRow(db.SelectAccountNumber, receiverAccountNumber)
+	row = Db.QueryRow(db.SelectAccountNumber, receiverAccountNumber)
 	err = row2.Scan(&receiverAccount.Number)
 	if err != nil {
 		panic(err)
